@@ -58,7 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _postList.add(_textEditingController.text);
+      _postList.insert(0, _textEditingController.text);
       _textEditingController.clear();
     });
   }
@@ -107,7 +107,14 @@ class _MyHomePageState extends State<MyHomePage> {
               keyboardType: TextInputType.multiline,
               maxLines: null,
             ),
-            Text(_postList.join(', '))
+            ListView.builder(
+                shrinkWrap: true,
+                itemCount: _postList.length,
+                itemBuilder: (context, index) {
+                  return Card(
+                    child: Text(_postList[index]),
+                  );
+                }),
           ],
         ),
       ),
