@@ -48,7 +48,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final textEditingController = TextEditingController();
+  final _textEditingController = TextEditingController();
   final List<String> _postList = [];
 
   void _createOrUpdatePost() {
@@ -58,8 +58,8 @@ class _MyHomePageState extends State<MyHomePage> {
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _postList.add(textEditingController.text);
-      textEditingController.clear();
+      _postList.add(_textEditingController.text);
+      _textEditingController.clear();
     });
   }
 
@@ -97,13 +97,15 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            TextField(
+            TextFormField(
               decoration: const InputDecoration(
                 border: InputBorder.none,
                 hintText: 'Input text',
               ),
               autofocus: true,
-              controller: textEditingController,
+              controller: _textEditingController,
+              keyboardType: TextInputType.multiline,
+              maxLines: null,
             ),
             Text(_postList.join(', '))
           ],
